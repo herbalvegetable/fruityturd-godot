@@ -16,7 +16,7 @@ var is_game_over = false
 var is_game_started = false
 
 func _ready():
-	print('Level is ready')
+	print('Level is ready!')
 	init_pipe_inst()
 	set_score_text(score)
 	set_highscore_text(highscore)
