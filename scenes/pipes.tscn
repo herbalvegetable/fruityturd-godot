@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxk2w7kcllh3m"]
+
+[ext_resource type="Script" path="res://scripts/Pipes.gd" id="1_8buof"]
+[ext_resource type="Texture2D" uid="uid://bmutfxicdbnpm" path="res://media/top pipe.png" id="2_e2241"]
+[ext_resource type="Texture2D" uid="uid://b8cxk4jd4p7c2" path="res://media/bottom pipe.png" id="3_3epjs"]
+[ext_resource type="Texture2D" uid="uid://byi3tqopsfnoq" path="res://media/icon.svg" id="4_1jcxj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_in1l3"]
+size = Vector2(42, 852)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ix8u"]
+size = Vector2(41.5, 853.5)
+
+[node name="Pipes" type="Node2D"]
+position = Vector2(-90, 302)
+script = ExtResource("1_8buof")
+
+[node name="TopPipe" type="Area2D" parent="."]
+position = Vector2(0, -50)
+
+[node name="TopPipeSprite" type="Sprite2D" parent="TopPipe"]
+position = Vector2(0, -431)
+texture = ExtResource("2_e2241")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe"]
+position = Vector2(0, -430)
+shape = SubResource("RectangleShape2D_in1l3")
+
+[node name="BottomPipe" type="Area2D" parent="."]
+position = Vector2(0, 44)
+
+[node name="BottomPipeSprite" type="Sprite2D" parent="BottomPipe"]
+position = Vector2(0, 431)
+texture = ExtResource("3_3epjs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
+position = Vector2(0, 431)
+shape = SubResource("RectangleShape2D_4ix8u")
+
+[node name="DebugMiddlePoint" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.203125, 0.203125)
+texture = ExtResource("4_1jcxj")

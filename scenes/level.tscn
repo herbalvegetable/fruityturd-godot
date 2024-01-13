@@ -1,0 +1,183 @@
+[gd_scene load_steps=13 format=3 uid="uid://dxesgaitxq6jo"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_wihbd"]
+[ext_resource type="Texture2D" uid="uid://ctwpujvpawxtc" path="res://media/original bg.png" id="2_3nskd"]
+[ext_resource type="Script" path="res://scripts/Bird.gd" id="3_bia6l"]
+[ext_resource type="Texture2D" uid="uid://gxy1xs0rctb8" path="res://media/bird.png" id="3_e2cq5"]
+[ext_resource type="PackedScene" uid="uid://dxk2w7kcllh3m" path="res://scenes/pipes.tscn" id="4_v7d0g"]
+[ext_resource type="FontFile" uid="uid://p1d5rv6ieb75" path="res://fonts/PatrickHand-Regular.ttf" id="6_lj3dv"]
+[ext_resource type="Script" path="res://scripts/GameOver.gd" id="7_etkqu"]
+[ext_resource type="Script" path="res://scripts/StartMenu.gd" id="8_nys6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yeghr"]
+size = Vector2(81.5703, 54.4063)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eitc4"]
+bg_color = Color(0.52549, 0.478431, 0.356863, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rb1cr"]
+bg_color = Color(1.85303e-06, 0.501887, 0.303068, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tr4y"]
+bg_color = Color(0, 0, 0, 0.196078)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_wihbd")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_3nskd")
+
+[node name="Pipes" parent="." instance=ExtResource("4_v7d0g")]
+visible = false
+
+[node name="PipeInstances" type="Node2D" parent="."]
+
+[node name="Bird" type="Node2D" parent="."]
+position = Vector2(680, 787)
+script = ExtResource("3_bia6l")
+
+[node name="BirdSprite" type="Sprite2D" parent="Bird"]
+texture = ExtResource("3_e2cq5")
+region_rect = Rect2(-92, -106, 188, 188)
+
+[node name="Area2D" type="Area2D" parent="Bird"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bird/Area2D"]
+shape = SubResource("RectangleShape2D_yeghr")
+
+[node name="Score" type="RichTextLabel" parent="."]
+offset_right = 260.0
+offset_bottom = 47.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("6_lj3dv")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[left] Score: [color=\"lime\"]%s"
+scroll_active = false
+
+[node name="Highscore" type="RichTextLabel" parent="."]
+offset_top = 54.0
+offset_right = 258.0
+offset_bottom = 108.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("6_lj3dv")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[left] Highscore"
+
+[node name="GameOver" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 257.0
+offset_top = 805.0
+offset_right = 297.0
+offset_bottom = 845.0
+script = ExtResource("7_etkqu")
+
+[node name="Panel" type="Panel" parent="GameOver"]
+layout_mode = 0
+offset_left = -230.0
+offset_top = -138.0
+offset_right = 220.0
+offset_bottom = 112.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eitc4")
+
+[node name="GameOverText" type="Label" parent="GameOver"]
+layout_mode = 0
+offset_left = -110.0
+offset_top = -116.0
+offset_right = 99.0
+offset_bottom = -47.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_lj3dv")
+theme_override_font_sizes/font_size = 50
+text = "Game Over!"
+
+[node name="ScoreText" type="Label" parent="GameOver"]
+layout_mode = 0
+offset_left = -61.0
+offset_top = -36.0
+offset_right = 42.0
+offset_bottom = 12.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_lj3dv")
+theme_override_font_sizes/font_size = 35
+text = "Score: 0
+"
+
+[node name="RetryButton" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 28.0
+offset_right = 30.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("6_lj3dv")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_rb1cr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2tr4y")
+text = "Retry"
+
+[node name="StartMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_nys6n")
+
+[node name="TitleText" type="RichTextLabel" parent="StartMenu"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 162.0
+offset_right = 539.0
+offset_bottom = 278.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("6_lj3dv")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[left] [color=\"#FFD61F\"]Fruity [color=\"#A26953\"]Turd"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartMenu"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 238.0
+offset_right = 542.0
+offset_bottom = 374.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("6_lj3dv")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[left] Press \"Space\" to flap!"
+
+[connection signal="area_entered" from="Bird/Area2D" to="Bird" method="_on_area_2d_area_entered"]
+[connection signal="pressed" from="GameOver/RetryButton" to="GameOver" method="_on_retry_button_pressed"]
